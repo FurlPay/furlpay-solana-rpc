@@ -1,8 +1,12 @@
 # @furlpay/solana-rpc
 
+![TypeScript](https://img.shields.io/badge/TypeScript-5.5-3178C6?logo=typescript&logoColor=white) ![Node.js](https://img.shields.io/badge/Node.js-%E2%89%A520-339933?logo=nodedotjs&logoColor=white) ![Edge runtime](https://img.shields.io/badge/Edge_runtime-compatible-000000?logo=vercel&logoColor=white) ![Solana](https://img.shields.io/badge/Solana-mainnet-9945FF?logo=solana&logoColor=white) [![Dependencies](https://img.shields.io/badge/dependencies-1-brightgreen)](https://github.com/FurlPay/furlpay-resilience) ![License](https://img.shields.io/badge/License-MIT-blue)
+
 **The operational half of the Solana payment rail.**
 
-`apps/web` already *constructs* real Solana transfers — `lib/actions/solana.ts` does SOL and SPL transfers, ATA derivation and platform-fee splitting. What it does not do is anything after signing. That file says so itself: it builds payloads *"WITHOUT a live RPC round-trip"*.
+Building a Solana transfer is the well-solved half: `@solana/web3.js` and `@solana/spl-token` construct SOL and SPL transfers, derive associated token accounts and split fees, and FurlPay's own payment app already does exactly that. What none of it does is anything *after* signing.
+
+That is this package.
 
 This package is that missing half: **submit, track, interpret, and stay healthy across multiple providers.**
 
@@ -30,9 +34,9 @@ try {
 
 ## It does not build transactions
 
-Deliberately. Construction needs `@solana/web3.js` and belongs where it already is. Submission and tracking are JSON-RPC over HTTP — keeping them free of that dependency lets this run in an Edge runtime *and* in the mobile app, both of which need to follow a payment's status without shipping a transaction builder.
+Deliberately. Construction needs `@solana/web3.js` and belongs wherever you already do it. Submission and tracking are JSON-RPC over HTTP — keeping them free of that dependency lets this run in an Edge runtime *and* on mobile, both of which need to follow a payment's status without shipping a transaction builder.
 
-**No SDK dependency. One workspace dependency: `@furlpay/resilience`.**
+**No Solana SDK dependency. One runtime dependency: [`@furlpay/resilience`](https://github.com/FurlPay/furlpay-resilience).**
 
 ---
 
