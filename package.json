@@ -1,0 +1,59 @@
+{
+  "name": "@furlpay/solana-rpc",
+  "version": "0.1.0",
+  "description": "The operational half of a Solana payment rail: multi-provider RPC with failover, Solana-aware failure classification, and honest confirmation/finality tracking. Builds no transactions and takes no SDK dependency.",
+  "license": "MIT",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist/index.js",
+    "dist/index.d.ts",
+    "dist/src",
+    "src",
+    "index.ts",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "npm run build && node --test dist/tests/errors.test.js dist/tests/confirmation.test.js"
+  },
+  "keywords": [
+    "solana",
+    "rpc",
+    "failover",
+    "payments",
+    "finality",
+    "confirmation",
+    "furlpay"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@furlpay/resilience": "^0.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "typescript": "^5.5.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FurlPay/furlpay-solana-rpc.git"
+  },
+  "homepage": "https://github.com/FurlPay/furlpay-solana-rpc#readme",
+  "bugs": {
+    "url": "https://github.com/FurlPay/furlpay-solana-rpc/issues"
+  },
+  "author": "FurlPay",
+  "publishConfig": {
+    "access": "public"
+  }
+}
